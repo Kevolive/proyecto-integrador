@@ -1,6 +1,7 @@
 import streamlit as st
 import base64
 
+
 # Configuración de la página
 st.set_page_config(
     page_title="Nuevas Tecnologías de Programación",

@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 # Configuración de la página
 st.set_page_config(   
@@ -10,10 +11,9 @@ st.title("Momento 2 - Actividad 1")
 
 st.header("Descripción de la actividad")
 st.markdown("""
-Esta actividad es una introducción práctica a Python y a las estructuras de datos básicas.
-En ella, exploraremos los conceptos fundamentales de Python y aprenderemos a utilizar variables,
-tipos de datos, operadores, y las estructuras de datos más utilizadas como listas, tuplas,
-diccionarios y conjuntos.
+Esta actividad estaremos enfocados a la creación de DataFrames,
+donde aprenderemos a crear DataFrames de forma manual, utilizando listas y diccionarios.
+Además, exploraremos cómo cargar datos desde archivos CSV y Excel para crear DataFrames de manera más eficiente.
 """)
 
 st.header("Objetivos de aprendizaje")
@@ -26,4 +26,31 @@ st.markdown("""
 """)
 
 st.header("Solución")
+st.subheader("Actividad 1 - Creación de DataFrames de libros", divider=True)
 
+libros = {
+    "Título": ["El Principito", "Cien años de soledad", "1984", "Eva Luna"],
+    "Autor": ["Antoine de Saint-Exupéry", "Gabriel García Márquez", "George Orwell", "Isabel Allende"],
+    "Año de publicación": [1943, 1967, 1949, 1987],
+    "Género": ["Ficción", "Realismo mágico", "Distopía", "Ficción"]
+}
+df_libros = pd.DataFrame(libros)
+
+st.write("DataFrame de libros:")
+st.dataframe(df_libros)
+
+st.write("### Código para crear el DataFrame de libros:")
+code="""
+import streamlit as st
+import pandas as pd
+libros = {
+    "Título": ["El Principito", "Cien años de soledad", "1984", "Eva Luna"],
+    "Autor": ["Antoine de Saint-Exupéry", "Gabriel García Márquez", "George Orwell", "Isabel Allende"],
+    "Año de publicación": [1943, 1967, 1949, 1987],
+    "Género": ["Ficción", "Realismo mágico", "Distopía", "Ficción"]
+}
+df_libros = pd.DataFrame(libros)
+
+st.write("DataFrame de libros:")
+st.dataframe(df_libros)"""
+st.code(code, language='python')
