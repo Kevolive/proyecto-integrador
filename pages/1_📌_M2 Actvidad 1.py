@@ -27,6 +27,8 @@ st.markdown("""
 
 st.header("Solución")
 st.subheader("Actividad 1 - Creación de DataFrames de libros con diferentes fuentes", divider=True)
+
+### Creación de DataFrame de libros con diccionario
 st.markdown("""1- DataFrame de libros con Diccionario:""")
 
 libros = {
@@ -55,3 +57,30 @@ df_libros = pd.DataFrame(libros)
 st.write("DataFrame de libros:")
 st.dataframe(df_libros)"""
 st.code(code, language='python')
+
+### Creación de DataFrame de libros con lista de diccionarios
+st.markdown("""2- DataFrame de libros con lista de diccionario:""")
+ciudades = [
+    {"Ciudad": "Medellín", "País": "Colombia", "Población": 2500000},
+    {"Ciudad": "Bogotá", "País": "Colombia", "Población": 8000000},
+    {"Ciudad": "Cali", "País": "Colombia", "Población": 2400000},
+    {"Ciudad": "Cartagena", "País": "Colombia", "Población": 1000000}
+]
+st.write("Información de ciudades:")
+df_ciudades = pd.DataFrame(ciudades)
+st.dataframe(df_ciudades)
+st.write("### Código para crear el DataFrame de ciudades:")
+
+code_ciudades="""import streamlit as st
+import pandas as pd
+ciudades = [
+    {"Ciudad": "Medellín", "País": "Colombia", "Población": 2500000},
+    {"Ciudad": "Bogotá", "País": "Colombia", "Población": 8000000},
+    {"Ciudad": "Cali", "País": "Colombia", "Población": 2400000},
+    {"Ciudad": "Cartagena", "País": "Colombia", "Población": 1000000}
+]
+st.write("Información de ciudades:")
+df_ciudades = pd.DataFrame(ciudades) 
+st.dataframe(df_ciudades)
+"""
+st.code(code_ciudades, language='python')
