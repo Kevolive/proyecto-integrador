@@ -26,7 +26,8 @@ st.markdown("""
 """)
 
 st.header("Solución")
-st.subheader("Actividad 1 - Creación de DataFrames de libros", divider=True)
+st.subheader("Actividad 1 - Creación de DataFrames de libros con diferentes fuentes", divider=True)
+st.markdown("""1- DataFrame de libros con Diccionario:""")
 
 libros = {
     "Título": ["El Principito", "Cien años de soledad", "1984", "Eva Luna"],
@@ -36,7 +37,7 @@ libros = {
 }
 df_libros = pd.DataFrame(libros)
 
-st.write("DataFrame de libros:")
+
 st.dataframe(df_libros)
 
 st.write("### Código para crear el DataFrame de libros:")
