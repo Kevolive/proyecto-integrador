@@ -29,7 +29,7 @@ st.header("Solución")
 st.subheader("Actividad 1 - Creación de DataFrames de libros con diferentes fuentes", divider=True)
 
 ### Creación de DataFrame de libros con diccionario
-st.markdown("""1- DataFrame de libros con Diccionario:""")
+st.subheader("""1- DataFrame de libros con Diccionario:""")
 
 libros = {
     "Título": ["El Principito", "Cien años de soledad", "1984", "Eva Luna"],
@@ -58,8 +58,8 @@ st.write("DataFrame de libros:")
 st.dataframe(df_libros)"""
 st.code(code, language='python')
 
-### Creación de DataFrame de libros con lista de diccionarios
-st.markdown("""2- DataFrame de libros con lista de diccionario:""")
+### Creación de DataFrame de ciudades con lista de diccionarios
+st.subheader("""2- DataFrame de ciudades con lista de diccionario:""")
 ciudades = [
     {"Ciudad": "Medellín", "País": "Colombia", "Población": 2500000},
     {"Ciudad": "Bogotá", "País": "Colombia", "Población": 8000000},
