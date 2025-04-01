@@ -157,18 +157,18 @@ st.dataframe(df_archivo)
 st.code(code_archivo, language='python')
 
 ### Ejercicio 6: Crear DataFrame con un archivo Excel
-st.subheader("""6- DataFrame  con Excel""")
-df_excel =pd.read_excel("data.xlsx", engine='openpyxl')
+# st.subheader("""6- DataFrame  con Excel""")
+# df_excel =pd.read_excel("data.xlsx", engine='openpyxl')
 
-st.dataframe(df_excel)
-st.write("### Código para crear el DataFrame:")
-code_excel="""
-import streamlit as st
-import pandas as pd
-df_excel = pd.read_excel("data.xlsx")
-st.dataframe(df_excel)
-"""
-st.code(code_excel, language='python')
+# st.dataframe(df_excel)
+# st.write("### Código para crear el DataFrame:")
+# code_excel="""
+# import streamlit as st
+# import pandas as pd
+# df_excel = pd.read_excel("data.xlsx")
+# st.dataframe(df_excel)
+# """
+# st.code(code_excel, language='python')
 
 ### Ejercicio 7: Crear DataFrame con un archivo JSON
 st.subheader("""7- DataFrame  con JSON""")
