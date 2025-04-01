@@ -157,7 +157,7 @@ st.dataframe(df_archivo)
 st.code(code_archivo, language='python')
 
 ### Ejercicio 6: Crear DataFrame con un archivo Excel
-# st.subheader("""6- DataFrame  con Excel""")
+st.subheader("""6- DataFrame  con Excel""")
 # df_excel =pd.read_excel("data.xlsx", engine='openpyxl')
 
 # st.dataframe(df_excel)
