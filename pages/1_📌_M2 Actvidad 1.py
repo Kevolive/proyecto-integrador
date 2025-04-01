@@ -124,6 +124,7 @@ ciuddad = pd.Series(["Medellín", "Cali", "Bogotá", "Cartagena"])
 df_nombres = pd.DataFrame({'Nombres': nombres, 'Edades': edades, 'Ciudad': ciuddad})
 st.dataframe(df_nombres)
 st.write("### Código para crear el DataFrame de estudiantes:")
+
 code_nombres=""" 
 "import streamlit as st
 import pandas as pd
@@ -137,3 +138,68 @@ df_nombres = pd.DataFrame({'Nombres': nombres, 'Edades': edades, 'Ciudad': ciudd
 st.dataframe(df_nombres)
 """
 st.code(code_nombres, language='python')
+
+### Ejercicio 5: Crear DataFrame con un archivo CSV
+st.subheader("""5- DataFrame de películas con CSV""")
+
+df_archivo = pd.read_csv("pages/data.csv", sep = ";")
+
+st.dataframe(df_archivo)
+st.write("### Código para crear el DataFrame de películas:")
+code_archivo="""
+import streamlit as st
+import pandas as pd
+
+df_archivo = pd.read_csv("pages/data.csv")
+st.dataframe(df_archivo)
+"""
+st.code(code_archivo, language='python')
+
+### Ejercicio 6: Crear DataFrame con un archivo Excel
+st.subheader("""6- DataFrame de películas con Excel""")
+df_excel = pd.read_excel("data.xlsx")
+
+st.dataframe(df_excel)
+st.write("### Código para crear el DataFrame de películas:")
+code_excel="""
+import streamlit as st
+import pandas as pd
+df_excel = pd.read_excel("data.xlsx")
+st.dataframe(df_excel)
+"""
+st.code(code_excel, language='python')
+
+### Ejercicio 7: Crear DataFrame con un archivo JSON
+st.subheader("""7- DataFrame de películas con JSON""")
+
+df_json = pd.read_json("data.json")
+
+st.dataframe(df_json)
+
+st.write("### Código para crear el DataFrame de películas:")
+code_json="""
+import streamlit as st
+import pandas as pd
+df_json = pd.read_json("data.json")
+st.dataframe(df_json)
+"""
+st.code(code_json, language='python')
+
+
+### Ejercicio 8: Crear DataFrame con una url
+st.subheader("""8- DataFrame de películas con URL""")
+
+df_url = pd.read_csv("https://people.sc.fsu.edu/~jburkardt/data/csv/cities.csv")
+
+st.dataframe(df_url)
+
+st.write("### Código para crear el DataFrame de películas:")
+code_url="""
+import streamlit as st
+import pandas as pd
+df_url = pd.read_csv("https://people.sc.fsu.edu/~jburkardt/data/csv/cities.csv")
+st.dataframe(df_url)
+"""
+st.code(code_url, language='python')
+
+
