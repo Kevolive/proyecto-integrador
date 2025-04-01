@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import openpyxl
+
 
 # Configuración de la página
 st.set_page_config(   
