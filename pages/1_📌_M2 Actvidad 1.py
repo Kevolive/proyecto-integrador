@@ -142,12 +142,12 @@ st.dataframe(df_nombres)
 st.code(code_nombres, language='python')
 
 ### Ejercicio 5: Crear DataFrame con un archivo CSV
-st.subheader("""5- DataFrame de películas con CSV""")
+st.subheader("""5- DataFrame con CSV""")
 
 df_archivo = pd.read_csv("pages/data.csv", sep = ";")
 
 st.dataframe(df_archivo)
-st.write("### Código para crear el DataFrame de películas:")
+st.write("### Código para crear el DataFrame excel:")
 code_archivo="""
 import streamlit as st
 import pandas as pd
@@ -195,7 +195,7 @@ df_url = pd.read_csv("https://people.sc.fsu.edu/~jburkardt/data/csv/cities.csv")
 
 st.dataframe(df_url)
 
-st.write("### Código para crear el DataFrame de películas:")
+st.write("### Código para crear el DataFrame con url:")
 code_url="""
 import streamlit as st
 import pandas as pd
