@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import sqlite3
 
 
 # Configuración de la página
@@ -204,76 +205,54 @@ st.dataframe(df_url)
 st.code(code_url, language='python')
 
 ### Ejercicio 9: Crear DataFrame con una base de datos sqlite
-st.subheader("""9- DataFrame de películas con SQLite""")
-import sqlite3
- 
-# Crear conexión a SQLite
-db_name = "estudiantes.db"
-conn = sqlite3.connect(db_name)
+
+st.subheader("""8- DataFrame de películas con SQLite""")
+db_estudiantes = "alumnos.db"
+conn = sqlite3.connect(db_estudiantes)
 cursor = conn.cursor()
 
-# Crear tabla
-cursor.execute('''
-    CREATE TABLE IF NOT EXISTS estudiantes (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        nombre TEXT,
-        calificacion INTEGER
-    )
-''')
-
-# Insertar datos de ejemplo
-datos = [
-    ("Ana", 85),
-    ("Carlos", 90),
-    ("Beatriz", 78)
-]
-cursor.executemany("INSERT INTO estudiantes (nombre, calificacion) VALUES (?, ?)", datos)
-conn.commit()
-
-# Leer datos en un DataFrame
-df_sql = pd.read_sql_query("SELECT * FROM estudiantes", conn)
-
-# Cerrar conexión
-conn.close()
-
-# Crear interfaz en Streamlit
-st.title("Datos desde SQLite")
-st.dataframe(df_sql)
-
-st.write("### Código para crear el DataFrame de películas:")
-code_sqlite="""
-import streamlit as st
-import sqlite3
-import pandas as pd
- 
- #Crear la conexión a la base de datos
-db_name = "estudiantes.db"
-conn = sqlite3.connect(db_name)
-cursor= conn.cursor()
-# Crear la tabla
-cursor.execute('''
-CREATE TABLE IF NOT EXISTS estudiantes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre TEXT NOT NULL,
-    edad INTEGER NOT NULL,
-    ciudad TEXT NOT NULL
+cursor.execute(''' CREATE TABLE IF NOT EXISTS alumnos (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+nombre TEXT,
+calificacion INTEGER
 )''')
-# Insertar datos en la tabla
+
 datos = [
-    ("Kevin", 5),
-    ("Debora", 4),
-    ("Marvin", 3),
-    ("Paola", 2)
-    
+    ("Kevin", 85),
+    ("Debora", 90),
+    ("Marvin", 78),
+    ("Paola", 88)
 ]
-cursor.executemany('''
-INSERT INTO estudiantes (nombre, edad, ciudad) VALUES (?, ?)''', datos)
+cursor.executemany("INSERT INTO alumnos (nombre, calificacion) VALUES (?, ?)", datos)   
 conn.commit()
-# Leer los datos de la tabla
-df_sqlite = pd.read_sql_query("SELECT * FROM estudiantes", conn)
-conn.close()
-st.dataframe(df_sqlite)
-"""
-st.code(code_sqlite, language='python')
 
+df_sql = pd.read_sql_query("SELECT * FROM alumnos", conn)
+st.dataframe(df_sql)
+st.write("### Código para crear el DataFrame de películas:")
+code_sql=""" 
+import streamlit as st 
+import pandas as pd
+import sqlite3
 
+db_estudiantes = "alumnos.db"
+conn = sqlite3.connect(db_estudiantes)
+cursor = conn.cursor()
+
+cursor.execute(''' CREATE TABLE IF NOT EXISTS alumnos (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+nombre TEXT,
+calificacion INTEGER
+)''')
+
+datos = [
+    ("Kevin", 85),
+    ("Debora", 90),
+    ("Marvin", 78),
+    ("Paola", 88)
+]
+cursor.executemany("INSERT INTO alumnos (nombre, calificacion) VALUES (?, ?)", datos)   
+conn.commit()
+
+df_sql = pd.read_sql_query("SELECT * FROM alumnos", conn)
+st.dataframe(df_sql) """
+st.code(code_sql, language='python')
