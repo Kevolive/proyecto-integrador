@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import sqlite3
+import numpy as np
 
 
 # Configuración de la página
@@ -256,3 +257,21 @@ conn.commit()
 df_sql = pd.read_sql_query("SELECT * FROM alumnos", conn)
 st.dataframe(df_sql) """
 st.code(code_sql, language='python')
+
+### Ejercicio 10: Crear DataFrame con numpy
+
+st.subheader("""10- DataFrame de números aleatorios con numpy""")
+arreglo_np = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+
+df_numpy = pd.DataFrame(arreglo_np, columns=["Datos primarios", "Datos secundarios", "Datos terciarios"])
+st.dataframe(df_numpy)
+st.write("### Código para crear el DataFrame con numpy:")
+code_numpy="""
+import streamlit as st
+import pandas as pd
+import numpy as np
+arreglo_np = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+df_numpy = pd.DataFrame(arreglo_np, columns=["Datos primarios", "Datos secundarios", "Datos terciarios"])
+st.dataframe(df_numpy)
+"""
+st.code(code_numpy, language='python')
