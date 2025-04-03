@@ -287,7 +287,8 @@ def attrdict_to_dict(attrdict):
     """Convierte un objeto AttrDict a un diccionario Python estándar."""
     return dict(attrdict)
 
-cred_toml = attrdict_to_dict(st.secrets["credentials"]) #<--- Modificacion
+# Cargar credenciales desde secrets
+cred_toml = attrdict_to_dict(st.secrets["credentials"])
 cred_dict = toml.loads(toml.dumps(cred_toml))
 cred = credentials.Certificate(cred_dict)
 
@@ -298,13 +299,22 @@ if not firebase_admin._apps:
 # Inicializa el cliente de Firestore
 db = firestore.client()
 
-# Ejemplo: Lee datos de una colección llamada "usuarios"
+# Obtener datos de la colección "usuarios"
 usuarios_ref = db.collection("usuarios")
 usuarios = usuarios_ref.stream()
 
-# Muestra los datos en la aplicación Streamlit
-st.title("Usuarios de Firestore")
+# Inicializar session_state para evitar errores
+if "usuario_dict" not in st.session_state:
+    st.session_state["usuario_dict"] = {"ID": [], "Nombre": [], "Edad": []}
 
+# Almacenar datos en session_state
+st.session_state["usuario_dict"] = {
+    "ID": [],
+    "Nombre": [],
+    "Edad": []
+}
+
+# Extraer datos y agregarlos a session_state
 for usuario in usuarios:
     usuario_dict = usuario.to_dict()
     st.session_state["usuario_dict"]["ID"].append(usuario.id)
@@ -312,11 +322,14 @@ for usuario in usuarios:
     st.session_state["usuario_dict"]["Edad"].append(usuario_dict.get("edad", "No disponible"))
 
 # Convertir a DataFrame
-df_usuarios = pd.DataFrame(st.session_state["usuario_dict"]) 
-st.write("DataFrame de los usuarios:")
+df_usuarios = pd.DataFrame(st.session_state["usuario_dict"])
+
+# Mostrar datos en la app
+st.title("Usuarios de Firestore")
+st.write("### Lista de Usuarios")
 st.dataframe(df_usuarios)
 
-# Ejemplo: Agregar datos a Firestore
+# Agregar nuevos usuarios
 st.header("Agregar Nuevo Usuario")
 
 nombre_nuevo = st.text_input("Nombre:")
@@ -326,7 +339,7 @@ if st.button("Agregar Usuario"):
     if nombre_nuevo and edad_nueva >= 0:
         nuevo_usuario = {"nombre": nombre_nuevo, "edad": edad_nueva}
         db.collection("usuarios").add(nuevo_usuario)
-        st.success("Usuario agregado correctamente.")
+        st.success("Usuario agregado correctamente. Recarga la página para ver los cambios.")
     else:
         st.warning("Por favor, ingresa un nombre y una edad válida.")
 
