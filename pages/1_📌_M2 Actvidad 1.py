@@ -343,5 +343,77 @@ if st.button("Agregar Usuario"):
     else:
         st.warning("Por favor, ingresa un nombre y una edad válida.")
 
+code_firebase="""
+import streamlit as st
+import pandas as pd
+import sqlite3
+import numpy as np
+import firebase_admin
+from firebase_admin import credentials, firestore
+import toml
+st.header("11- DataFrame con FireBase")
+
+def attrdict_to_dict(attrdict):
+    Convierte un objeto AttrDict a un diccionario Python estándar.
+    return dict(attrdict)
+
+# Cargar credenciales desde secrets
+cred_toml = attrdict_to_dict(st.secrets["credentials"])
+cred_dict = toml.loads(toml.dumps(cred_toml))
+cred = credentials.Certificate(cred_dict)
+
+# Inicializa la aplicación Firebase si aún no se ha inicializado
+if not firebase_admin._apps:
+    firebase_admin.initialize_app(cred)
+
+# Inicializa el cliente de Firestore
+db = firestore.client()
+
+# Obtener datos de la colección "usuarios"
+usuarios_ref = db.collection("usuarios")
+usuarios = usuarios_ref.stream()
+
+# Inicializar session_state para evitar errores
+if "usuario_dict" not in st.session_state:
+    st.session_state["usuario_dict"] = {"ID": [], "Nombre": [], "Edad": []}
+
+# Almacenar datos en session_state
+st.session_state["usuario_dict"] = {
+    "ID": [],
+    "Nombre": [],
+    "Edad": []
+}
+
+# Extraer datos y agregarlos a session_state
+for usuario in usuarios:
+    usuario_dict = usuario.to_dict()
+    st.session_state["usuario_dict"]["ID"].append(usuario.id)
+    st.session_state["usuario_dict"]["Nombre"].append(usuario_dict.get("nombre", "No disponible"))
+    st.session_state["usuario_dict"]["Edad"].append(usuario_dict.get("edad", "No disponible"))
+
+# Convertir a DataFrame
+df_usuarios = pd.DataFrame(st.session_state["usuario_dict"])
+
+# Mostrar datos en la app
+st.title("Usuarios de Firestore")
+st.write("### Lista de Usuarios")
+st.dataframe(df_usuarios)
+
+# Agregar nuevos usuarios
+st.header("Agregar Usuario")
+
+nombre_nuevo = st.text_input("Nombre:")
+edad_nueva = st.number_input("Edad:", min_value=0, step=1)
+
+if st.button("Agregar Usuario"):
+    if nombre_nuevo and edad_nueva >= 0:
+        nuevo_usuario = {"nombre": nombre_nuevo, "edad": edad_nueva}
+        db.collection("usuarios").add(nuevo_usuario)
+        st.success("Usuario agregado correctamente. Recarga la página para ver los cambios.")
+    else:
+        st.warning("Por favor, ingresa un nombre y una edad válida.")
+        """
+st.code(code_firebase, language='python')
+
 
 
