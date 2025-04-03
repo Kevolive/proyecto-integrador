@@ -314,7 +314,7 @@ for usuario in usuarios:
 
     df_usuarios = pd.DataFrame(st.session_state.usuario_lista)
 
-    st.write("DataFrame de usuarios:")
+    st.write("DataFrame de los usuarios:")
     st.dataframe(df_usuarios)
 
 # Ejemplo: Agregar datos a Firestore
