@@ -281,7 +281,7 @@ st.dataframe(df_numpy)
 st.code(code_numpy, language='python')
 
 ### Ejercicio 11: Crear DataFrame con Firebase
-st.header("FireBase")
+st.header("11- DataFrame con FireBase")
 
 def attrdict_to_dict(attrdict):
     """Convierte un objeto AttrDict a un diccionario Python estándar."""
@@ -330,7 +330,7 @@ st.write("### Lista de Usuarios")
 st.dataframe(df_usuarios)
 
 # Agregar nuevos usuarios
-st.header("Agregar Nuevo Usuario")
+st.header("Agregar Usuario")
 
 nombre_nuevo = st.text_input("Nombre:")
 edad_nueva = st.number_input("Edad:", min_value=0, step=1)
