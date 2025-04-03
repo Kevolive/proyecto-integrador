@@ -312,6 +312,11 @@ for usuario in usuarios:
     edad = usuario_dict.get("edad", "Edad no disponible")
     st.write(f"ID: {usuario.id}, Nombre: {nombre}, Edad: {edad}")
 
+    df_usuarios = pd.DataFrame([usuario_dict])
+    
+    st.write("DataFrame de usuarios:")
+    st.dataframe(df_usuarios)
+
 # Ejemplo: Agregar datos a Firestore
 st.header("Agregar Nuevo Usuario")
 
