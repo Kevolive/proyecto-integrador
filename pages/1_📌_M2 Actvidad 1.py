@@ -307,13 +307,13 @@ usuarios = usuarios_ref.stream()
 st.title("Usuarios de Firestore")
 
 for usuario in usuarios:
-    usuario_dict = usuario.to_dict()
-    nombre = usuario_dict.get("nombre", "Nombre no disponible")
-    edad = usuario_dict.get("edad", "Edad no disponible")
+    usuario_lista = usuario.to_dict()
+    nombre = usuario_lista.get("nombre", "Nombre no está disponible")
+    edad = usuario_lista.get("edad", "Edad no está disponible")
     st.write(f"ID: {usuario.id}, Nombre: {nombre}, Edad: {edad}")
 
-    df_usuarios = pd.DataFrame([usuario_dict])
-    
+    df_usuarios = pd.DataFrame(st.session_state.usuario_lista)
+
     st.write("DataFrame de usuarios:")
     st.dataframe(df_usuarios)
 
