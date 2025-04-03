@@ -317,7 +317,7 @@ st.session_state["usuario_dict"] = {
 # Extraer datos y agregarlos a session_state
 for usuario in usuarios:
     usuario_dict = usuario.to_dict()
-    # st.session_state["usuario_dict"]["ID"].append(usuario.id)
+    st.session_state["usuario_dict"]["ID"].append(usuario.id)
     st.session_state["usuario_dict"]["Nombre"].append(usuario_dict.get("nombre", "No disponible"))
     st.session_state["usuario_dict"]["Edad"].append(usuario_dict.get("edad", "No disponible"))
 
