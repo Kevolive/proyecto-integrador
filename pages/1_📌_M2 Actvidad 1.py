@@ -2,6 +2,10 @@ import streamlit as st
 import pandas as pd
 import sqlite3
 import numpy as np
+import firebase_admin
+from firebase_admin import credentials, firestore
+import toml
+
 
 
 # Configuración de la página
@@ -207,7 +211,7 @@ st.code(code_url, language='python')
 
 ### Ejercicio 9: Crear DataFrame con una base de datos sqlite
 
-st.subheader("""8- DataFrame de películas con SQLite""")
+st.subheader("""9- DataFrame con SQLite""")
 db_estudiantes = "alumnos.db"
 conn = sqlite3.connect(db_estudiantes)
 cursor = conn.cursor()
@@ -275,3 +279,52 @@ df_numpy = pd.DataFrame(arreglo_np, columns=["Datos primarios", "Datos secundari
 st.dataframe(df_numpy)
 """
 st.code(code_numpy, language='python')
+
+### Ejercicio 11: Crear DataFrame con Firebase
+st.subheader("""11- DataFrame de libros con Firebase""")
+st.header("FireBase")
+
+def attrdict_to_dict(attrdict):
+    """Convierte un objeto AttrDict a un diccionario Python estándar."""
+    return dict(attrdict)
+
+cred_toml = attrdict_to_dict(st.secrets["credentials"]) #<--- Modificacion
+cred_dict = toml.loads(toml.dumps(cred_toml))
+cred = credentials.Certificate(cred_dict)
+
+# Inicializa la aplicación Firebase si aún no se ha inicializado
+if not firebase_admin._apps:
+    firebase_admin.initialize_app(cred)
+
+# Inicializa el cliente de Firestore
+db = firestore.client()
+
+# Ejemplo: Lee datos de una colección llamada "usuarios"
+usuarios_ref = db.collection("usuarios")
+usuarios = usuarios_ref.stream()
+
+# Muestra los datos en la aplicación Streamlit
+st.title("Usuarios de Firestore")
+
+for usuario in usuarios:
+    usuario_dict = usuario.to_dict()
+    nombre = usuario_dict.get("nombre", "Nombre no disponible")
+    edad = usuario_dict.get("edad", "Edad no disponible")
+    st.write(f"ID: {usuario.id}, Nombre: {nombre}, Edad: {edad}")
+
+# Ejemplo: Agregar datos a Firestore
+st.header("Agregar Nuevo Usuario")
+
+nombre_nuevo = st.text_input("Nombre:")
+edad_nueva = st.number_input("Edad:", min_value=0, step=1)
+
+if st.button("Agregar Usuario"):
+    if nombre_nuevo and edad_nueva >= 0:
+        nuevo_usuario = {"nombre": nombre_nuevo, "edad": edad_nueva}
+        db.collection("usuarios").add(nuevo_usuario)
+        st.success("Usuario agregado correctamente.")
+    else:
+        st.warning("Por favor, ingresa un nombre y una edad válida.")
+
+
+
