@@ -307,12 +307,12 @@ st.title("Usuarios de Firestore")
 
 for usuario in usuarios:
     usuario_dict = usuario.to_dict()
-    nombre = usuario_dict.get("nombre", "Nombre no disponible")
-    edad = usuario_dict.get("edad", "Edad no disponible")
-    st.write(f"ID: {usuario.id}, Nombre: {nombre}, Edad: {edad}")
+    st.session_state["usuario_dict"]["ID"].append(usuario.id)
+    st.session_state["usuario_dict"]["Nombre"].append(usuario_dict.get("nombre", "No disponible"))
+    st.session_state["usuario_dict"]["Edad"].append(usuario_dict.get("edad", "No disponible"))
 
-# Crea un DataFrame a partir de los datos de Firestore
-df_usuarios = pd.DataFrame(st.session_state.usuario_dict) 
+# Convertir a DataFrame
+df_usuarios = pd.DataFrame(st.session_state["usuario_dict"]) 
 st.write("DataFrame de los usuarios:")
 st.dataframe(df_usuarios)
 
