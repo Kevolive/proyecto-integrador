@@ -312,7 +312,7 @@ for usuario in usuarios:
     edad = usuario_lista.get("edad", "Edad no está disponible")
     st.write(f"ID: {usuario.id}, Nombre: {nombre}, Edad: {edad}")
 
-    df_usuarios = pd.DataFrame(st.session_state.usuario_lista)
+    df_usuarios = pd.DataFrame([st.session_state.usuario_lista])
 
     st.write("DataFrame de los usuarios:")
     st.dataframe(df_usuarios)
