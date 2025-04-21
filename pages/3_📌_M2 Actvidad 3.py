@@ -26,4 +26,10 @@ st.markdown("""
 """)
 
 st.header("Solución")
+st.markdown("""
+La solución a la actividad se encuentra en el siguiente enlace de Google Colab.
+Puedes abrirlo y ejecutarlo directamente en tu navegador.
+""")
+st.link_button("Abrir Colab", "https://colab.research.google.com/drive/1pPVlh0OY_tketv767dl9SWDYDrI2xBZj?usp=sharing")
+
 
