@@ -13,19 +13,18 @@ st.title("Momento 2 - Actividad 4")
 
 st.header("Descripción de la actividad")
 st.markdown("""
-Esta actividad es una introducción práctica a Python y a las estructuras de datos básicas.
-En ella, exploraremos los conceptos fundamentales de Python y aprenderemos a utilizar variables,
-tipos de datos, operadores, y las estructuras de datos más utilizadas como listas, tuplas,
-diccionarios y conjuntos.
+Esta actividad se realiza para practicar el uso de los métodos `.loc` y `.iloc` de Pandas.
+En esta actividad, se generará un DataFrame con datos ficticios y se utilizarán los métodos `.loc` y `.iloc` para seleccionar y modificar datos en el DataFrame.
+El objetivo es entender cómo funcionan estos métodos y cuándo es apropiado usar cada uno de ellos.
 """)
 
 st.header("Objetivos de aprendizaje")
 
 st.markdown("""
-- Comprender los tipos de datos básicos en Python
-- Aprender a utilizar variables y operadores
-- Dominar las estructuras de datos fundamentales
-- Aplicar estos conocimientos en ejemplos prácticos
+- Comprender la diferencia entre los métodos `.loc` y `.iloc` de Pandas.
+- Aprender a seleccionar datos en un DataFrame utilizando etiquetas y posiciones.
+- Practicar la modificación de datos en un DataFrame.
+- Familiarizarse con la interfaz de Streamlit para la visualización y manipulación de datos.
 """)
 
 st.header("Solución")
