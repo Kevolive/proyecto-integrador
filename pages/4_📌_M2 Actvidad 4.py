@@ -35,7 +35,7 @@ def crear_dataframe():
     return pd.DataFrame({
         "Nombre": ["Kevin", "Marvin", "Carmen", "Marta", "Paola", "Humberto", "Katiana", "Pedro", "Debora", "Jarod"],
         "Edad": np.random.randint(20, 40, 10),
-        "Ciudad": ["Madrid", "Barcelona", "Valencia", "Sevilla", "Bilbao", "Zaragoza", "Malaga", "Murcia", "Granada", "Alicante"],
+        "Ciudad": ["Villanueva", "Bello", "Maracay", "Valledupar", "Medellín", "Villanueva", "Villanueva", "Urummita", "Salsipuedes", "Yolombó"],
         "Puntaje": np.random.randint(60, 100, 10)
     }, index=["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"])
     
